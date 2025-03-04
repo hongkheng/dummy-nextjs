@@ -13,7 +13,12 @@ export default async function Home() {
         <Button variant="outline">login with auth0</Button>
       </Header>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <p>Pretend X IDP</p>
+        <p>Pretend X IDP</p>
+
+        <a href="/auth/login?screen_hint=signup">Sign up</a>
+        <a href="/auth/login">Log in</a>
+
+        {session && <div>{JSON.stringify(session)}</div>}
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
 
