@@ -1,19 +1,16 @@
 'use client'
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-import { Identity, Session } from "@ory/client";
 
 // const ory = new FrontendApi(new Configuration(edgeConfig))
 
 // Returns either the email or the username depending on the user's Identity Schema
-const getUserName = (identity: Identity | undefined) =>
-  identity?.traits.email || identity?.traits.username || "user"
+// const getUserName = (identity: Identity | undefined) =>
+//   identity?.traits.email || identity?.traits.username || "user"
 
 export default function Page() {
-  const router = useRouter()
-  const [session, setSession] = useState<Session | undefined>()
-  const [logoutUrl, setLogoutUrl] = useState<string | undefined>()
+  // const router = useRouter()
+  // const [session, setSession] = useState<Session | undefined>()
+  // const [logoutUrl, setLogoutUrl] = useState<string | undefined>()
 
   // useEffect(() => {
   //   ory
@@ -48,11 +45,11 @@ export default function Page() {
         <a href="https://priceless-rhodes-xs818rwyhy.projects.oryapis.com/self-service/login/browser">login with Ory</a>
 
         {/* <p>Hello, {getUserName(session.identity)}</p> */}
-          <div>
+          {/* <div>
             <p className="sm:p-20 font-[family-name:var(--font-geist-sans)">
               <a href={logoutUrl}>Log out</a>
             </p>
-          </div>        
+          </div>         */}
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
 
