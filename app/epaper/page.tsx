@@ -1,11 +1,10 @@
 'use client'
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { Configuration, FrontendApi, Identity, Session } from "@ory/client";
-import { edgeConfig } from "@ory/integrations/next";
+import { Identity, Session } from "@ory/client";
 
-const ory = new FrontendApi(new Configuration(edgeConfig))
+// const ory = new FrontendApi(new Configuration(edgeConfig))
 
 // Returns either the email or the username depending on the user's Identity Schema
 const getUserName = (identity: Identity | undefined) =>
@@ -16,36 +15,39 @@ export default function Page() {
   const [session, setSession] = useState<Session | undefined>()
   const [logoutUrl, setLogoutUrl] = useState<string | undefined>()
 
-  useEffect(() => {
-    ory
-      .toSession()
-      .then(({ data }) => {
-        // User has a session!
-        setSession(data)
-        // Create a logout url
-        ory.createBrowserLogoutFlow().then(({ data }) => {
-          setLogoutUrl(data.logout_url)
-        })
-      })
-      .catch(() => {
-        // Redirect to login page
-        return router.push(edgeConfig.basePath + "/ui/login")
-      })
-  }, [router])
+  // useEffect(() => {
+  //   ory
+  //     .toSession()
+  //     .then(({ data }) => {
+  //       // User has a session!
+  //       setSession(data)
+  //       console.log("session", { data })
+  //       // Create a logout url
+  //       // ory.createBrowserLogoutFlow().then(({ data }) => {
+  //       //   setLogoutUrl(data.logout_url)
+  //       // })
+  //     })
+  //     .catch(() => {
+  //       // Redirect to login page
 
-  if (!session) {
-    // Still loading
-    return null
-  }
+  //       return
+  //       // return router.push(edgeConfig.basePath + "/ui/login")
+  //     })
+  // }, [router])
+
+  // if (!session) {
+  //   // Still loading
+  //   return null
+  // }
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <header>
         <h1>test dummy home page</h1>
       </header>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h3>Login with Ory</h3>
+        <a href="https://priceless-rhodes-xs818rwyhy.projects.oryapis.com/self-service/login/browser">login with Ory</a>
 
-        <p>Hello, {getUserName(session.identity)}</p>
+        {/* <p>Hello, {getUserName(session.identity)}</p> */}
           <div>
             <p className="sm:p-20 font-[family-name:var(--font-geist-sans)">
               <a href={logoutUrl}>Log out</a>
