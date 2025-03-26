@@ -1,7 +1,7 @@
 'use client'
 import { Configuration, FrontendApi, Identity, Session } from "@ory/client"
 import { edgeConfig } from "@ory/integrations/next"
-import { useRouter } from "next/router"
+import { useRouter } from "next/compat/router"
 import { useEffect, useState } from "react"
 
 const ory = new FrontendApi(new Configuration(edgeConfig))
@@ -16,15 +16,18 @@ export default function Page() {
   const [logoutUrl, setLogoutUrl] = useState<string | undefined>()
 
   useEffect(() => {
-    ory.toSession().then(({ data }) => {
-      setSession(data)
-      ory.createBrowserLogoutFlow().then(({ data }) => {
-        setLogoutUrl(data.logout_url)
+    if (router && !router.isReady) {
+      ory.toSession().then(({ data }) => {
+        setSession(data)
+        ory.createBrowserLogoutFlow().then(({ data }) => {
+          setLogoutUrl(data.logout_url)
+        })
+        router.reload();
+      }).catch((error) => {
+        console.log("error", error)
+        router.reload();
       })
-    }).catch((error) => {
-      console.log("error", error)
-      router.reload();
-    })
+    }
   }, [router])
 
   return (
