@@ -1,6 +1,7 @@
 'use client'
 import { Configuration, FrontendApi, Identity, Session } from "@ory/client"
 import { edgeConfig } from "@ory/integrations/next"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
 const ory = new FrontendApi(new Configuration(edgeConfig))
@@ -10,7 +11,7 @@ const getUserName = (identity: Identity | undefined) =>
   identity?.traits.email || identity?.traits.username || "user"
 
 export default function Page() {
-
+  const router = useRouter()
   const [session, setSession] = useState<Session | undefined>()
   const [logoutUrl, setLogoutUrl] = useState<string | undefined>()
 
@@ -22,8 +23,9 @@ export default function Page() {
       })
     }).catch((error) => {
       console.log("error", error)
+      router.reload();
     })
-  }, [])
+  }, [router])
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
