@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 
 const ory = new FrontendApi(new Configuration(edgeConfig))
 
-// Returns either the email or the username depending on the user's Identity Schema
 const getUserName = (identity: Identity | undefined) =>
   identity?.traits.email || identity?.traits.username || "user"
 
@@ -30,6 +29,7 @@ export default function Page() {
     }
   }, [router])
 
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <header>
@@ -39,9 +39,6 @@ export default function Page() {
         <div>
           <a href="">Trigger custom auth flow</a>
         </div>
-        {
-          !session && <a href="https://priceless-rhodes-xs818rwyhy.projects.oryapis.com/self-service/login/browser?return_to=https://dummy-nextjs-xi.vercel.app/subhome">Login with Ory Network</a>
-        }
         {
           session && <div>
             <p>User: {getUserName(session.identity)}</p>
