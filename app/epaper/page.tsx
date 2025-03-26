@@ -25,7 +25,7 @@ export default function Page() {
         router.reload();
       }).catch((error) => {
         console.log("error", error)
-        router.reload();
+        return router.push(edgeConfig.basePath + "/ui/login")
       })
     }
   }, [router])
@@ -40,7 +40,7 @@ export default function Page() {
           <a href="">Trigger custom auth flow</a>
         </div>
         {
-          !session && <a href="https://priceless-rhodes-xs818rwyhy.projects.oryapis.com/self-service/login/browser?refresh=true">Login with Ory Network</a>
+          !session && <a href="https://priceless-rhodes-xs818rwyhy.projects.oryapis.com/self-service/login/browser?refresh=true&return_to=https://dummy-nextjs-xi.vercel.app/epaper">Login with Ory Network</a>
         }
         {
           session && <div>
