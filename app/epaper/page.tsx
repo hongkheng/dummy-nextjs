@@ -40,7 +40,7 @@ export default function Page() {
           <a href="">Trigger custom auth flow</a>
         </div>
         {
-          !session && <a href="https://priceless-rhodes-xs818rwyhy.projects.oryapis.com/self-service/login/browser?return_to=https://dummy-nextjs-xi.vercel.app/subhome">Login with Ory Network</a>
+          !session && <a href="https://priceless-rhodes-xs818rwyhy.projects.oryapis.com/self-service/login/browser?refresh=true">Login with Ory Network</a>
         }
         {
           session && <div>
