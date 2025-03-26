@@ -10,4 +10,6 @@ export { config }
 export default createApiHandler({
   fallbackToPlayground: true,
   dontUseTldForCookieDomain: true,
+  apiBaseUrlOverride: "https://priceless-rhodes-xs818rwyhy.projects.oryapis.com",
+  forceCookieDomain: "https://dummy-nextjs-xi.vercel.app"
 })
