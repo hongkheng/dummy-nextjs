@@ -4,6 +4,30 @@ import { auth0 } from "@/lib/auth0";
 export default async function Home() {
   const auth0session = await auth0.getSession();
 
+  const oryClientAuth = async () => {
+    const payload = {
+      publication: 'straitstimes',
+      service: 'epaper',
+    }
+
+    try {
+          const res = await fetch('https://api.dev.idp.sph.com.sg/v1/client/nlb/authorize', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': process.env.IDPF_API_KEY,
+              'x-idp': 'ory',
+            },
+            body: JSON.stringify(payload),
+          })
+
+          const data = await res.json()
+          console.log('Response:', data)
+    } catch (error) {
+      console.error('Error posting data:', error)
+    }
+  }
+
   console.log("session", { auth0session });
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -20,6 +44,9 @@ export default async function Home() {
 
         {auth0session && <>
           <div>{JSON.stringify(auth0session)}</div>
+          <div>
+            <button onclick={oryClientAuth}>Ory Client Authorize</button>
+          </div>
           <div>
             <a href="/auth/logout">Logout with auth0</a>
           </div>
