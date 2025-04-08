@@ -1,6 +1,10 @@
 import { Header } from "@/components/ui/header";
 import { auth0 } from "@/lib/auth0";
 
+const headers = new Headers({
+  'Content-Type': 'application/json',
+})
+
 export default async function Home() {
   const auth0session = await auth0.getSession();
 
@@ -9,20 +13,18 @@ export default async function Home() {
       publication: 'straitstimes',
       service: 'epaper',
     }
+    headers.set("x-api-key", process.env.IDPF_API_KEY || "");
+    headers.set("x-idp", "ory");
 
     try {
-          const res = await fetch('https://api.dev.idp.sph.com.sg/v1/client/nlb/authorize', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-api-key': process.env.IDPF_API_KEY,
-              'x-idp': 'ory',
-            },
-            body: JSON.stringify(payload),
-          })
+      const res = await fetch('https://api.dev.idp.sph.com.sg/v1/client/nlb/authorize', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload),
+      })
 
-          const data = await res.json()
-          console.log('Response:', data)
+      const data = await res.json()
+      console.log('Response:', data)
     } catch (error) {
       console.error('Error posting data:', error)
     }
