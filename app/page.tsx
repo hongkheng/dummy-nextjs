@@ -47,7 +47,7 @@ export default async function Home() {
         {auth0session && <>
           <div>{JSON.stringify(auth0session)}</div>
           <div>
-            <button onclick={oryClientAuth}>Ory Client Authorize</button>
+            <button onClick={oryClientAuth}>Ory Client Authorize</button>
           </div>
           <div>
             <a href="/auth/logout">Logout with auth0</a>
