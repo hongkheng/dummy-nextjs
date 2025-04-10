@@ -12,7 +12,7 @@ export async function oryauth() {
     console.log("url", url);
     try {
       const redirectAuth = await fetch(url);
-      console.log("succes", redirectAuth);
+      console.log("success", redirectAuth);
     } catch (error) {
       console.error("cannot redirect", error);
     }
@@ -26,7 +26,7 @@ async function clientauth() {
   }
   headers.set("x-api-key", process.env.IDPF_API_KEY || "");
   headers.set("x-idp", "ory");
-  headers.set("origin", "https://dummy-nextjs-xi.vercel.app");
+  // headers.set("origin", "https://dummy-nextjs-xi.vercel.app");
 
   try {
     const res = await fetch('https://api.dev.idp.sph.com.sg/v1/client/nlb/authorize', {
