@@ -14,6 +14,7 @@ export function OryTest() {
     }
     headers.set("x-api-key", process.env.IDPF_API_KEY || "");
     headers.set("x-idp", "ory");
+    headers.set("origin", "https://dummy-nextjs-xi.vercel.app");
 
     try {
       const res = await fetch('https://api.dev.idp.sph.com.sg/v1/client/nlb/authorize', {
