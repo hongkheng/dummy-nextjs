@@ -5,6 +5,21 @@ const headers = new Headers({
 })
 
 export async function oryauth() {
+  const data = await clientauth()
+
+  if (data) {
+    const url = data.data;
+    console.log("url", url);
+    try {
+      const redirectAuth = await fetch(url);
+      console.log("succes", redirectAuth);
+    } catch (error) {
+      console.error("cannot redirect", error);
+    }
+  }
+}
+
+async function clientauth() {
   const payload = {
     publication: 'straitstimes',
     service: 'epaper',
