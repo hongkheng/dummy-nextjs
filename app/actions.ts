@@ -23,6 +23,7 @@ export async function oryauth() {
 
     const data = await res.json()
     console.log('Response:', data)
+    return data;
   } catch (error) {
     console.error('Error posting data:', error)
   }
