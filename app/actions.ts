@@ -1,4 +1,4 @@
-"user server"
+"use server"
 
 const headers = new Headers({
   'Content-Type': 'application/json',
