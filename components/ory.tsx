@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from "./ui/button";
+
 export function OryTest() {
   const headers = new Headers({
     'Content-Type': 'application/json',
@@ -16,6 +18,7 @@ export function OryTest() {
     try {
       const res = await fetch('https://api.dev.idp.sph.com.sg/v1/client/nlb/authorize', {
         method: 'POST',
+        mode: 'cors',
         headers,
         body: JSON.stringify(payload),
       })
@@ -28,9 +31,7 @@ export function OryTest() {
   }
 
   return(
-    <div>
-      <button onClick={oryClientAuth}>Ory Client Authorize</button>
-    </div>
+    <Button onClick={oryClientAuth}>Ory Client Authorize</Button>
   )
 
 }

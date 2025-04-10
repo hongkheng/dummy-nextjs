@@ -18,10 +18,10 @@ export default async function Home() {
             <a href="/auth/login">Log in auth0</a>
           </>
         }
-
+        <OryTest />
         {auth0session && <>
           <div>{JSON.stringify(auth0session)}</div>
-            <OryTest />
+
           <div>
             <a href="/auth/logout">Logout with auth0</a>
           </div>
